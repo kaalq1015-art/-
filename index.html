@@ -66,24 +66,10 @@
             border-radius: 4px;
         }
 
-        @media (max-width: 1024px) {
-            :root {
-                --tile-size: 3.5rem;
-                --key-height: 2.8rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            :root {
-                --tile-size: 3.2rem;
-                --key-height: 2.6rem;
-            }
-        }
-
         @media (max-width: 640px) {
             :root {
-                --tile-size: 2.8rem;
-                --key-height: 2.4rem;
+                --tile-size: 3rem;
+                --key-height: 2.8rem;
             }
         }
 
@@ -91,27 +77,6 @@
             :root {
                 --tile-size: 2.5rem;
                 --key-height: 2.2rem;
-            }
-        }
-
-        @media (max-width: 380px) {
-            :root {
-                --tile-size: 2.3rem;
-                --key-height: 2rem;
-            }
-        }
-
-        @media (max-width: 320px) {
-            :root {
-                --tile-size: 2rem;
-                --key-height: 1.8rem;
-            }
-        }
-
-        @media (min-width: 1025px) and (min-height: 700px) {
-            :root {
-                --tile-size: 4.5rem;
-                --key-height: 3.5rem;
             }
         }
 
@@ -156,13 +121,13 @@
 
         .key {
             height: var(--key-height);
-            min-width: calc(var(--key-height) * 0.8);
+            min-width: 40px;
             background-color: var(--key-bg);
             color: var(--key-text);
             border: none;
             border-radius: 6px;
             font-weight: 700;
-            font-size: calc(var(--key-height) * 0.35);
+            font-size: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -170,9 +135,8 @@
             user-select: none;
             transition: all 0.2s ease;
             touch-action: manipulation;
-            padding: 0 6px;
+            padding: 0 8px;
             margin: 2px;
-            flex: 1;
         }
 
         .key:hover, .key:active {
@@ -181,10 +145,8 @@
         }
 
         .key.wide {
-            min-width: calc(var(--key-height) * 1.6);
-            font-size: calc(var(--key-height) * 0.3);
-            font-weight: 600;
-            flex: 2;
+            min-width: 70px;
+            font-size: 0.9rem;
         }
 
         .key.correct {
@@ -290,73 +252,14 @@
             border-radius: 50%;
         }
 
-        @media (max-height: 700px) {
-            :root {
-                --tile-size: 2.5rem;
-                --key-height: 2.2rem;
-            }
-            
-            header {
-                padding: 0.5rem 1rem;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .grid-rows-8 {
-                gap: 0.25rem;
-            }
-            
-            #keyboard {
-                margin-top: 0.5rem;
-                padding: 0 0.25rem;
-            }
-            
-            .key-row {
-                margin-bottom: 0.25rem;
-            }
-        }
-
-        @media (max-height: 600px) {
-            :root {
-                --tile-size: 2.2rem;
-                --key-height: 2rem;
-            }
-            
-            #message {
-                margin-bottom: 0.5rem;
-                height: 1.5rem;
-                font-size: 0.9rem;
-            }
-        }
-
-        .grid-rows-8 {
-            gap: 0.5rem;
-        }
-
-        @media (max-width: 640px) {
-            .grid-rows-8 {
-                gap: 0.4rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .grid-rows-8 {
-                gap: 0.3rem;
-            }
-        }
-
         header {
             padding: 1rem;
-            min-height: 4rem;
             border-bottom: 1px solid var(--border-color);
         }
 
         h1 {
             font-size: 2rem;
             font-weight: 800;
-            letter-spacing: -0.5px;
         }
 
         .icon-btn {
@@ -375,10 +278,6 @@
 
         .icon-btn:hover {
             background-color: rgba(0, 0, 0, 0.1);
-        }
-
-        .dark-mode .icon-btn:hover {
-            background-color: rgba(255, 255, 255, 0.1);
         }
 
         main {
@@ -409,8 +308,8 @@
         .key-row {
             display: flex;
             justify-content: center;
-            gap: 0.25rem;
-            margin-bottom: 0.5rem;
+            gap: 4px;
+            margin-bottom: 8px;
         }
 
         .modal-content {
@@ -463,26 +362,6 @@
                     <button id="closeHelp" class="text-2xl hover:text-[var(--absent-color)] transition">&times;</button>
                 </div>
                 
-                <p class="mb-4 text-lg">تخمّن الكلمة في 8 محاولات</p>
-                <p class="mb-6 text-lg">بعد كل تخمين، يتغير لون البلاطات ليعطيك تلميحات</p>
-                
-                <div class="space-y-4 mb-6">
-                    <div class="flex items-center gap-3">
-                        <div class="tile correct" style="width: 3rem; height: 3rem; font-size: 1.8rem;">ن</div>
-                        <p class="text-lg">الحرف <strong>ن</strong> في مكانه الصحيح</p>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <div class="tile present" style="width: 3rem; height: 3rem; font-size: 1.8rem;">ع</div>
-                        <p class="text-lg">الحرف <strong>ع</strong> موجود في الكلمة ولكن في مكان آخر</p>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <div class="tile absent" style="width: 3rem; height: 3rem; font-size: 1.8rem;">ا</div>
-                        <p class="text-lg">الحرف <strong>ا</strong> غير موجود في الكلمة</p>
-                    </div>
-                </div>
-                
-                <p class="mb-6 text-lg"><strong>ملاحظة:</strong> النظام يميز بين الحروف المختلفة (أ، إ، آ، ا، ة، ه)</p>
-                
                 <div class="text-center">
                     <button id="startGameBtn" class="bg-[var(--correct-color)] text-white px-8 py-3 rounded-lg font-bold hover:opacity-90 transition text-lg w-full">
                         بدء لعبة جديدة
@@ -500,32 +379,7 @@
                     <button id="closeStats" class="text-2xl hover:text-[var(--absent-color)] transition">&times;</button>
                 </div>
                 
-                <div class="flex justify-around mb-8">
-                    <div class="text-center">
-                        <div id="playedCount" class="text-3xl font-bold">0</div>
-                        <div class="text-sm mt-1">العب</div>
-                    </div>
-                    <div class="text-center">
-                        <div id="winPercent" class="text-3xl font-bold">0%</div>
-                        <div class="text-sm mt-1">فوز</div>
-                    </div>
-                    <div class="text-center">
-                        <div id="currentStreak" class="text-3xl font-bold">0</div>
-                        <div class="text-sm mt-1">تتابع</div>
-                    </div>
-                    <div class="text-center">
-                        <div id="maxStreak" class="text-3xl font-bold">0</div>
-                        <div class="text-sm mt-1">أعلى تتابع</div>
-                    </div>
-                </div>
-                
-                <h3 class="font-bold mb-3 text-lg">توزيع التخمينات</h3>
-                <div id="guessDistribution" class="space-y-1 mb-6"></div>
-                
                 <div class="space-y-3">
-                    <button id="shareBtn" class="w-full bg-[var(--correct-color)] text-white py-3 rounded-lg font-bold hover:opacity-90 transition text-lg">
-                        <i class="fas fa-share-alt ml-2"></i> مشاركة النتيجة
-                    </button>
                     <button id="newGameBtn" class="w-full border-2 border-[var(--border-color)] py-3 rounded-lg font-bold hover:bg-[var(--default-color)] transition text-lg">
                         لعبة جديدة
                     </button>
@@ -542,42 +396,6 @@
                     <button id="closeSettings" class="text-2xl hover:text-[var(--absent-color)] transition">&times;</button>
                 </div>
                 
-                <div class="space-y-4">
-                    <div class="flex items-center justify-between py-2">
-                        <span class="text-lg">الوضع الليلي</span>
-                        <label class="switch">
-                            <input type="checkbox" id="darkModeToggle">
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
-                    
-                    <div class="flex items-center justify-between py-2">
-                        <span class="text-lg">صوت التأثيرات</span>
-                        <label class="switch">
-                            <input type="checkbox" id="soundToggle" checked>
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
-                    
-                    <div class="pt-4 border-t border-[var(--border-color)]">
-                        <h3 class="font-bold mb-3 text-lg">اختر صعوبة الكلمة:</h3>
-                        <div class="space-y-3">
-                            <label class="flex items-center py-2">
-                                <input type="radio" name="difficulty" value="easy" checked class="ml-3 w-5 h-5">
-                                <span class="text-lg">سهلة (كلمات شائعة)</span>
-                            </label>
-                            <label class="flex items-center py-2">
-                                <input type="radio" name="difficulty" value="medium" class="ml-3 w-5 h-5">
-                                <span class="text-lg">متوسطة</span>
-                            </label>
-                            <label class="flex items-center py-2">
-                                <input type="radio" name="difficulty" value="hard" class="ml-3 w-5 h-5">
-                                <span class="text-lg">صعبة (كلمات نادرة)</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                
                 <div class="mt-8 text-center">
                     <button id="resetStatsBtn" class="text-red-500 hover:text-red-700 transition text-lg py-2">
                         <i class="fas fa-trash-alt ml-2"></i> إعادة تعيين الإحصائيات
@@ -588,46 +406,10 @@
     </div>
 
     <script>
-        // قائمة الكلمات الصحيحة (الكلمات المستهدفة)
-        const CORRECT_WORDS = [
+        // قائمة الكلمات العربية
+        const WORD_LIST = [
             "مكتب", "كتاب", "قلم", "ورقة", "باب", "نافذة", "سيارة", "بيت", "شجرة", "وردة",
-            "تفاحة", "ليمون", "طاولة", "كرسي", "سرير", "ساعة", "تلفاز", "هاتف", "حاسوب", "شاشة",
-            "فأرة", "لوحة", "نظارة", "حقيبة", "حذاء", "قميص", "بنطلون", "فستان", "سروال", "معطف",
-            "قبعة", "شال", "سجادة", "وسادة", "بطانية", "غطاء", "ملعقة", "شوكة", "سكين", "صحن",
-            "كأس", "ابريق", "طنجرة", "مقلاة", "فرن", "ثلاجة", "غسالة", "مكنسة", "مروحة", "تكييف",
-            "مدفأة", "مصباح", "بطارية", "شاحن", "سلك", "مقبس", "زر", "مفتاح", "قفل", "سلسلة",
-            "حلقة", "سوار", "عقد", "خاتم", "قرط", "محفظة", "نقود", "بطاقة", "جواز", "هوية",
-            "رخصة", "عقد", "وثيقة", "ملف", "مجلد", "دفتر", "مذكر", "رسالة", "بريد", "طابع",
-            "علبة", "صندوق", "سلة", "سطل", "دلو", "خرطوم", "مكنة", "آلة", "أداة", "عدة",
-            "جهاز", "نظام", "برنامج", "تطبيق", "موقع", "صفحة", "رابط", "عنوان", "كلمة", "رقم",
-            "سوق", "متجر", "محل", "مكتب", "شركة", "مصنع", "مزرعة", "حقل", "بستان", "حديقة",
-            "ملعب", "مسبح", "نادي", "فندق", "مطعم", "مقهى", "سوبر", "صيدلية", "مستشفى", "عيادة",
-            "بنك", "صراف", "سفارة", "قنصل", "وزارة", "دائرة", "مؤسسة", "جمعية", "نقابة", "اتحاد",
-            "لجنة", "مجلس", "برلمان", "حكومة", "دولة", "مدينة", "قرية", "حي", "شارع", "ساحة"
-        ];
-
-        // قائمة الكلمات المسموح تخمينها (تشمل الكلمات الصحيحة + كلمات إضافية)
-        const ALLOWED_WORDS = [
-            // الكلمات الصحيحة
-            ...CORRECT_WORDS,
-            
-            // كلمات إضافية مسموح تخمينها
-            "أب", "أم", "ابن", "بنت", "أخ", "أخت", "جد", "جدة", "حفيد", "حفيدة",
-            "عم", "عمة", "خال", "خالة", "زوج", "زوجة", "صهر", "كنة", "صديق", "صديقة",
-            "جار", "جارة", "زميل", "زميلة", "معلم", "معلمة", "طالب", "طالبة", "دكتور", "ممرض",
-            "مهندس", "طبيب", "محام", "قاضي", "شرطي", "جندي", "رئيس", "مدير", "موظف", "عامل",
-            "سائق", "طباخ", "خباز", "نجار", "حداد", "بناء", "سباك", "كهربائي", "ميكانيكي", "خياط",
-            "تاجر", "بائع", "زبون", "عميل", "زائر", "ضيف", "سائح", "مرشد", "حاج", "معتمر",
-            "مصل", "قارئ", "كاتب", "شاعر", "فنان", "رياضي", "لاعب", "حكم", "مدرب", "متسابق",
-            "فائز", "خاسر", "متفرج", "جمهور", "ناس", "شعب", "أمة", "قبيلة", "عائلة", "أسرة",
-            "فرد", "شخص", "إنسان", "بشر", "ذكر", "أنثى", "طفل", "رضيع", "صبي", "فتى",
-            "شاب", "رجل", "امرأة", "عجوز", "شيخ", "مسن", "كبير", "صغير", "شاب", "فتاة",
-            "صبية", "طفلة", "رضيعة", "شابة", "عجوزة", "شيخة", "مسنة", "كبيرة", "صغيرة", "شابة",
-            "وجه", "عين", "أنف", "فم", "أذن", "شفة", "لسان", "سن", "ضرس", "لثة",
-            "حنجرة", "رقبة", "حلق", "صدر", "قلب", "رئة", "كبد", "معدة", "أمعاء", "كلى",
-            "مثانة", "دماغ", "عصب", "عظم", "عضل", "جلد", "شعر", "ظفر", "دم", "عرق",
-            "دموع", "لعاب", "رأس", "يد", "رجل", "قدم", "إصبع", "كف", "كعب", "ساق",
-            "ركبة", "فخذ", "ورك", "ظهر", "بطن", "كتف", "عنق", "وجه", "عين", "أنف"
+            "تفاحة", "ليمون", "طاولة", "كرسي", "سرير", "ساعة", "تلفاز", "هاتف", "حاسوب", "شاشة"
         ];
 
         const gameState = {
@@ -635,47 +417,15 @@
             currentRow: 0,
             currentGuess: "",
             gameOver: false,
-            gameWon: false,
-            isMobile: false,
-            stats: {
-                played: 0,
-                wins: 0,
-                currentStreak: 0,
-                maxStreak: 0,
-                guessDistribution: [0, 0, 0, 0, 0, 0, 0, 0]
-            }
+            gameWon: false
         };
 
         // التهيئة
         function init() {
-            loadStats();
-            loadTheme();
             createGrid();
             createKeyboard();
             startNewGame();
             setupEventListeners();
-            
-            // ضبط الحجم الأولي
-            adjustLayoutForScreen();
-        }
-
-        function loadStats() {
-            const saved = localStorage.getItem('arwordle_stats');
-            if (saved) {
-                gameState.stats = JSON.parse(saved);
-            }
-        }
-
-        function saveStats() {
-            localStorage.setItem('arwordle_stats', JSON.stringify(gameState.stats));
-        }
-
-        function loadTheme() {
-            const isDark = localStorage.getItem('arwordle_dark') === 'true';
-            if (isDark) {
-                document.body.classList.add('dark-mode');
-                document.querySelector('#themeToggle i').className = 'fas fa-sun text-xl';
-            }
         }
 
         function createGrid() {
@@ -702,27 +452,14 @@
             const keyboard = document.getElementById('keyboard');
             keyboard.innerHTML = '';
             
-            const isMobile = window.innerWidth <= 768;
-            gameState.isMobile = isMobile;
-            
-            // لوحة المفاتيح العربية الكاملة
+            // لوحة المفاتيح العربية البسيطة
             const arabicKeys = [
                 ["ض", "ص", "ث", "ق", "ف", "غ", "ع", "ه", "خ", "ح", "ج", "د"],
                 ["ش", "س", "ي", "ب", "ل", "ا", "ت", "ن", "م", "ك", "ط"],
-                ["ذ", "ء", "ؤ", "ر", "ى", "ة", "و", "ز", "ظ", "⌫", "Enter"]
+                ["Enter", "ذ", "ء", "ؤ", "ر", "ى", "ة", "و", "ز", "ظ", "⌫"]
             ];
             
-            // للجوال، نقسم لوحة المفاتيح إلى 4 صفوف
-            const arabicKeysMobile = [
-                ["ض", "ص", "ث", "ق", "ف", "غ", "ع", "ه", "خ", "ح"],
-                ["ج", "د", "ش", "س", "ي", "ب", "ل", "ا", "ت", "ن"],
-                ["م", "ك", "ط", "ذ", "ء", "ؤ", "ر", "ى", "ة", "و"],
-                ["ز", "ظ", "⌫", "Enter"]
-            ];
-            
-            const keyboardLayout = isMobile ? arabicKeysMobile : arabicKeys;
-            
-            keyboardLayout.forEach((row, rowIndex) => {
+            arabicKeys.forEach((row) => {
                 const rowDiv = document.createElement('div');
                 rowDiv.className = 'key-row';
                 
@@ -731,11 +468,11 @@
                     
                     if (keyChar === 'Enter') {
                         key.textContent = 'تأكيد';
-                        key.className = 'key wide bg-[var(--correct-color)] text-white';
+                        key.className = 'key wide bg-[#6ca965] text-white';
                         key.dataset.key = 'Enter';
                     } else if (keyChar === '⌫') {
                         key.textContent = '⌫';
-                        key.className = 'key wide bg-[var(--absent-color)] text-white';
+                        key.className = 'key wide bg-[#818384] text-white';
                         key.dataset.key = 'Backspace';
                     } else {
                         key.textContent = keyChar;
@@ -743,20 +480,8 @@
                         key.dataset.key = keyChar;
                     }
                     
-                    key.addEventListener('click', (e) => {
-                        e.preventDefault();
+                    key.addEventListener('click', () => {
                         handleInput(key.dataset.key);
-                    });
-                    
-                    // تحسين للشاشات التي تعمل باللمس
-                    key.addEventListener('touchstart', (e) => {
-                        e.preventDefault();
-                        key.style.opacity = '0.8';
-                    });
-                    
-                    key.addEventListener('touchend', (e) => {
-                        e.preventDefault();
-                        key.style.opacity = '1';
                     });
                     
                     rowDiv.appendChild(key);
@@ -766,31 +491,10 @@
             });
         }
 
-        function adjustLayoutForScreen() {
-            const isMobile = window.innerWidth <= 768;
-            
-            // إعادة إنشاء لوحة المفاتيح إذا تغير حجم الشاشة
-            if (isMobile !== gameState.isMobile) {
-                gameState.isMobile = isMobile;
-                createKeyboard();
-            }
-        }
-
         function startNewGame() {
-            // اختيار كلمة عشوائية من قائمة الكلمات الصحيحة (5 أحرف فقط)
-            let filteredWords = CORRECT_WORDS.filter(word => word.length === 5);
-            
-            // إذا لم توجد كلمات من 5 أحرف، استخدم كلمات من القائمة المسموحة
-            if (filteredWords.length === 0) {
-                filteredWords = ALLOWED_WORDS.filter(word => word.length === 5);
-            }
-            
-            if (filteredWords.length === 0) {
-                filteredWords = ["مكتب", "كتاب", "قلم", "ورقة", "باب"];
-            }
-            
-            gameState.targetWord = filteredWords[Math.floor(Math.random() * filteredWords.length)];
-            console.log("الكلمة المستهدفة:", gameState.targetWord); // لإزالة هذا السطر في الإصدار النهائي
+            // اختيار كلمة عشوائية
+            const words = WORD_LIST.filter(word => word.length === 5);
+            gameState.targetWord = words[Math.floor(Math.random() * words.length)];
             
             gameState.currentRow = 0;
             gameState.currentGuess = '';
@@ -826,18 +530,8 @@
                     updateGrid();
                 }
             } else if (gameState.currentGuess.length < 5) {
-                // قبول الحروف العربية فقط
-                if (/^[\u0600-\u06FF]$/.test(key)) {
-                    gameState.currentGuess += key;
-                    updateGrid();
-                    
-                    // تأثير ظهور الحرف
-                    const tile = document.getElementById(`tile-${gameState.currentRow}-${gameState.currentGuess.length-1}`);
-                    if (tile) {
-                        tile.classList.add('filled');
-                        setTimeout(() => tile.classList.remove('filled'), 100);
-                    }
-                }
+                gameState.currentGuess += key;
+                updateGrid();
             }
         }
 
@@ -857,18 +551,7 @@
                 return;
             }
             
-            if (!isValidWord(gameState.currentGuess)) {
-                showMessage('الكلمة غير موجودة في القاموس');
-                shakeRow();
-                return;
-            }
-            
             evaluateGuess();
-        }
-
-        function isValidWord(word) {
-            // التحقق من القائمة المسموحة
-            return ALLOWED_WORDS.includes(word);
         }
 
         function evaluateGuess() {
@@ -878,12 +561,10 @@
             const result = Array(5).fill('absent');
             const targetLetters = {};
             
-            // عد تكرارات الحروف في الكلمة المستهدفة
             for (const letter of target) {
                 targetLetters[letter] = (targetLetters[letter] || 0) + 1;
             }
             
-            // المرور الأول: العثور على الحروف الصحيحة في أماكنها
             for (let i = 0; i < 5; i++) {
                 if (guess[i] === target[i]) {
                     result[i] = 'correct';
@@ -891,7 +572,6 @@
                 }
             }
             
-            // المرور الثاني: العثور على الحروف الموجودة ولكن في أماكن مختلفة
             for (let i = 0; i < 5; i++) {
                 if (result[i] !== 'correct' && targetLetters[guess[i]] > 0) {
                     result[i] = 'present';
@@ -899,7 +579,6 @@
                 }
             }
             
-            // تطبيق النتائج مع الرسوم المتحركة
             for (let i = 0; i < 5; i++) {
                 const tile = document.getElementById(`tile-${gameState.currentRow}-${i}`);
                 const delay = i * 300;
@@ -919,10 +598,10 @@
                 if (won) {
                     gameState.gameWon = true;
                     gameState.gameOver = true;
-                    handleWin();
+                    showMessage('🎉 أحسنت! لقد فزت!');
                 } else if (gameState.currentRow === 7) {
                     gameState.gameOver = true;
-                    handleLoss();
+                    showMessage(`💔 الكلمة كانت: ${gameState.targetWord}`);
                 } else {
                     gameState.currentRow++;
                     gameState.currentGuess = '';
@@ -945,35 +624,6 @@
             }
         }
 
-        function handleWin() {
-            showMessage('🎉 أحسنت! لقد فزت!');
-            gameState.stats.played++;
-            gameState.stats.wins++;
-            gameState.stats.currentStreak++;
-            gameState.stats.maxStreak = Math.max(gameState.stats.maxStreak, gameState.stats.currentStreak);
-            gameState.stats.guessDistribution[gameState.currentRow]++;
-            
-            saveStats();
-            updateStatsDisplay();
-            
-            setTimeout(() => {
-                showStats();
-            }, 1500);
-        }
-
-        function handleLoss() {
-            showMessage(`💔 الكلمة كانت: ${gameState.targetWord}`);
-            gameState.stats.played++;
-            gameState.stats.currentStreak = 0;
-            
-            saveStats();
-            updateStatsDisplay();
-            
-            setTimeout(() => {
-                showStats();
-            }, 1500);
-        }
-
         function showMessage(text) {
             const messageEl = document.getElementById('message');
             messageEl.textContent = text;
@@ -989,96 +639,28 @@
             }
         }
 
-        function showStats() {
-            updateStatsDisplay();
-            document.getElementById('statsModal').classList.remove('hidden');
-        }
-
-        function updateStatsDisplay() {
-            document.getElementById('playedCount').textContent = gameState.stats.played;
-            document.getElementById('winPercent').textContent = gameState.stats.played > 0 
-                ? Math.round((gameState.stats.wins / gameState.stats.played) * 100) + '%'
-                : '0%';
-            document.getElementById('currentStreak').textContent = gameState.stats.currentStreak;
-            document.getElementById('maxStreak').textContent = gameState.stats.maxStreak;
-            
-            const distContainer = document.getElementById('guessDistribution');
-            distContainer.innerHTML = '';
-            
-            const maxDist = Math.max(...gameState.stats.guessDistribution, 1);
-            
-            gameState.stats.guessDistribution.forEach((count, index) => {
-                const bar = document.createElement('div');
-                bar.className = 'stats-bar';
-                bar.style.width = maxDist > 0 ? `${(count / maxDist) * 100}%` : '0%';
-                bar.textContent = `${index + 1}: ${count}`;
-                distContainer.appendChild(bar);
-            });
-        }
-
-        function shareResult() {
-            let shareText = `كلمة 🧩\n`;
-            shareText += `النتيجة: ${gameState.gameWon ? gameState.currentRow + 1 : 'X'}/8\n\n`;
-            
-            for (let row = 0; row <= gameState.currentRow; row++) {
-                for (let col = 0; col < 5; col++) {
-                    const tile = document.getElementById(`tile-${row}-${col}`);
-                    if (tile.classList.contains('correct')) {
-                        shareText += '🟩';
-                    } else if (tile.classList.contains('present')) {
-                        shareText += '🟨';
-                    } else if (tile.classList.contains('absent')) {
-                        shareText += '⬛';
-                    }
-                }
-                shareText += '\n';
-            }
-            
-            shareText += '\n#كلمة #لعبة_كلمة';
-            
-            if (navigator.share) {
-                navigator.share({
-                    title: 'كلمة - Wordle بالعربية',
-                    text: shareText,
-                    url: window.location.href
-                });
-            } else {
-                navigator.clipboard.writeText(shareText)
-                    .then(() => {
-                        showMessage('تم نسخ النتيجة إلى الحافظة!');
-                    })
-                    .catch(() => {
-                        showMessage('حدث خطأ في المشاركة');
-                    });
-            }
-        }
-
         function setupEventListeners() {
             // معالجة إدخال لوحة المفاتيح الفعلية
             document.addEventListener('keydown', (e) => {
                 if (gameState.gameOver) return;
                 
                 if (e.key === 'Enter') {
-                    e.preventDefault();
                     handleInput('Enter');
-                } else if (e.key === 'Backspace' || e.key === 'Delete') {
-                    e.preventDefault();
+                } else if (e.key === 'Backspace') {
                     handleInput('Backspace');
-                } else if (/^[\u0600-\u06FF]$/.test(e.key)) {
+                } else if (e.key.length === 1) {
                     handleInput(e.key);
                 }
             });
-            
-            // ضبط التخطيط عند تغيير حجم الشاشة
-            window.addEventListener('resize', adjustLayoutForScreen);
-            window.addEventListener('orientationchange', adjustLayoutForScreen);
             
             // أزرار العناوين
             document.getElementById('helpBtn').addEventListener('click', () => {
                 document.getElementById('helpModal').classList.remove('hidden');
             });
             
-            document.getElementById('statsBtn').addEventListener('click', showStats);
+            document.getElementById('statsBtn').addEventListener('click', () => {
+                document.getElementById('statsModal').classList.remove('hidden');
+            });
             
             document.getElementById('settingsBtn').addEventListener('click', () => {
                 document.getElementById('settingsModal').classList.remove('hidden');
@@ -1089,10 +671,8 @@
                 const icon = document.querySelector('#themeToggle i');
                 if (document.body.classList.contains('dark-mode')) {
                     icon.className = 'fas fa-sun text-xl';
-                    localStorage.setItem('arwordle_dark', 'true');
                 } else {
                     icon.className = 'fas fa-moon text-xl';
-                    localStorage.setItem('arwordle_dark', 'false');
                 }
             });
             
@@ -1118,23 +698,6 @@
             document.getElementById('newGameBtn').addEventListener('click', () => {
                 document.getElementById('statsModal').classList.add('hidden');
                 startNewGame();
-            });
-            
-            document.getElementById('shareBtn').addEventListener('click', shareResult);
-            
-            document.getElementById('resetStatsBtn').addEventListener('click', () => {
-                if (confirm('هل أنت متأكد من إعادة تعيين جميع الإحصائيات؟')) {
-                    gameState.stats = {
-                        played: 0,
-                        wins: 0,
-                        currentStreak: 0,
-                        maxStreak: 0,
-                        guessDistribution: [0, 0, 0, 0, 0, 0, 0, 0]
-                    };
-                    saveStats();
-                    updateStatsDisplay();
-                    showMessage('تم إعادة تعيين الإحصائيات');
-                }
             });
             
             // إغلاق النوافذ المنبثقة بالنقر خارجها
