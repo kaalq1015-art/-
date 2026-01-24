@@ -7,30 +7,15 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap'); * {
+            @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap');
+            
+            * {
                 font-family: 'Tajawal', sans-serif;
                 box-sizing: border-box;
             }
 
+            /* الوضع الليلي (الأساسي) */
             :root {
-                --correct-color: #6ca965;
-                --present-color: #c8b653;
-                --absent-color: #787c7e;
-                --default-color: #d3d6da;
-                --bg-color: #ffffff;
-                --text-color: #000000;
-                --border-color: #d3d6da;
-                --key-bg: #d3d6da;
-                --key-text: #000000;
-                --enter-color: #5b9bd5;
-                --backspace-color: #ff6b6b;
-                --newgame-color: #3498db;
-                --newgame-hover: #2980b9;
-                --easy-color: #4CAF50;
-                --hard-color: #f44336;
-            }
-
-            .dark-mode {
                 --correct-color: #538d4e;
                 --present-color: #b59f3b;
                 --absent-color: #3a3a3c;
@@ -44,6 +29,25 @@
                 --backspace-color: #e74c3c;
                 --newgame-color: #2980b9;
                 --newgame-hover: #3498db;
+                --easy-color: #4CAF50;
+                --hard-color: #f44336;
+            }
+
+            /* الوضع النهاري */
+            .light-mode {
+                --correct-color: #6ca965;
+                --present-color: #c8b653;
+                --absent-color: #787c7e;
+                --default-color: #d3d6da;
+                --bg-color: #ffffff;
+                --text-color: #000000;
+                --border-color: #d3d6da;
+                --key-bg: #d3d6da;
+                --key-text: #000000;
+                --enter-color: #5b9bd5;
+                --backspace-color: #ff6b6b;
+                --newgame-color: #3498db;
+                --newgame-hover: #2980b9;
                 --easy-color: #4CAF50;
                 --hard-color: #f44336;
             }
@@ -141,11 +145,9 @@
                 0% {
                     transform: scale(1);
                 }
-
                 50% {
                     transform: scale(1.1);
                 }
-
                 100% {
                     transform: scale(1);
                 }
@@ -177,11 +179,9 @@
                 0% {
                     transform: rotateX(0);
                 }
-
                 50% {
                     transform: rotateX(90deg);
                 }
-
                 100% {
                     transform: rotateX(0);
                 }
@@ -326,11 +326,9 @@
                 0%, 100% {
                     transform: translateX(0);
                 }
-
                 10%, 30%, 50%, 70%, 90% {
                     transform: translateX(-5px);
                 }
-
                 20%, 40%, 60%, 80% {
                     transform: translateX(5px);
                 }
@@ -344,7 +342,6 @@
                 0%, 100% {
                     transform: translateY(0);
                 }
-
                 50% {
                     transform: translateY(-10px);
                 }
@@ -600,11 +597,9 @@
                 0% {
                     transform: scale(1);
                 }
-
                 50% {
                     transform: scale(1.05);
                 }
-
                 100% {
                     transform: scale(1);
                 }
@@ -618,7 +613,7 @@
                 margin-bottom: 15px;
                 padding: 10px;
                 border-radius: 8px;
-                background-color: rgba(var(--default-color-rgb), 0.1);
+                background-color: rgba(129, 131, 132, 0.1);
             }
 
             @media (max-width: 640px) {
@@ -804,7 +799,6 @@
                 0%, 100% {
                     transform: scale(1);
                 }
-
                 50% {
                     transform: scale(1.05);
                 }
@@ -851,7 +845,7 @@
                 padding: 15px;
                 border: 2px solid var(--border-color);
                 border-radius: 10px;
-                background-color: rgba(var(--default-color), 0.05);
+                background-color: rgba(129, 131, 132, 0.05);
             }
 
             .matrix-title {
@@ -1123,7 +1117,7 @@
             }
         </style>
     </head>
-    <body class="flex flex-col min-h-screen dark-mode">
+    <body class="flex flex-col min-h-screen">
         <!-- الرأس -->
         <header class="relative flex items-center justify-between px-3 py-2 min-h-[60px] border-bottom border-[var(--border-color)]">
             <div class="flex items-center gap-2 z-10">
@@ -1154,8 +1148,9 @@
                     <i class="fas fa-redo-alt text-sm"></i>
                 </button>
                 <button id="themeToggle" class="p-2 hover:bg-[var(--default-color)] rounded-full flex items-center gap-1">
-    <i class="fas fa-sun text-lg"></i> <span class="mobile-hidden text-sm">نهاري</span>
-</button>
+                    <i class="fas fa-sun text-lg"></i>
+                    <span class="mobile-hidden text-sm">نهاري</span>
+                </button>
             </div>
         </header>
         <!-- شبكة اللعبة -->
@@ -1478,27 +1473,20 @@
                 localStorage.setItem(ATTEMPTS_KEY, JSON.stringify(gameState.attemptsHistory));
             }
 
-            // تحميل الوضع الليلي
+            // تحميل الوضع (الوضع الليلي هو الأساسي)
             function loadTheme() {
-    // التحقق مما إذا كان هناك اختيار سابق مخزن
-    const savedTheme = localStorage.getItem(THEME_KEY);
-    
-    // إذا لم يوجد اختيار سابق (أول مرة يدخل)، اجعل الافتراضي "true" (ليلي)
-    const isDark = savedTheme === null ? true : savedTheme === 'true';
-    
-    const icon = document.querySelector('#themeToggle i');
-    const text = document.querySelector('#themeToggle span');
-
-    if (isDark) {
-        document.body.classList.add('dark-mode');
-        if (icon) icon.className = 'fas fa-sun text-lg';
-        if (text) text.textContent = 'نهاري';
-    } else {
-        document.body.classList.remove('dark-mode');
-        if (icon) icon.className = 'fas fa-moon text-lg';
-        if (text) text.textContent = 'ليلي';
-    }
-}
+                // الوضع الليلي هو الأساسي، لذلك لا نحتاج لتحميل أي شيء
+                // فقط نتأكد أن الوضع الليلي مفعل
+                document.body.classList.remove('light-mode');
+                const icon = document.querySelector('#themeToggle i');
+                const text = document.querySelector('#themeToggle span');
+                icon.className = 'fas fa-sun text-lg';
+                if (text)
+                    text.textContent = 'نهاري';
+                
+                // تخزين أن الوضع الحالي هو الليلي (الأساسي)
+                localStorage.setItem(THEME_KEY, 'true');
+            }
 
             // عرض التعليمات إذا كانت أول مرة
             function showHelpIfFirstTime() {
@@ -2254,20 +2242,25 @@
                 });
 
                 document.getElementById('themeToggle').addEventListener('click', () => {
-                    document.body.classList.toggle('dark-mode');
-                    const icon = document.querySelector('#themeToggle i');
-                    const text = document.querySelector('#themeToggle span');
-
-                    if (document.body.classList.contains('dark-mode')) {
+                    // تبديل بين الوضع الليلي (الأساسي) والوضع النهاري
+                    if (document.body.classList.contains('light-mode')) {
+                        // الانتقال إلى الوضع الليلي (الأساسي)
+                        document.body.classList.remove('light-mode');
+                        const icon = document.querySelector('#themeToggle i');
+                        const text = document.querySelector('#themeToggle span');
                         icon.className = 'fas fa-sun text-lg';
                         if (text)
                             text.textContent = 'نهاري';
-                        localStorage.setItem(THEME_KEY, 'true');
+                        localStorage.setItem(THEME_KEY, 'true'); // الليلي هو الأساسي
                     } else {
+                        // الانتقال إلى الوضع النهاري
+                        document.body.classList.add('light-mode');
+                        const icon = document.querySelector('#themeToggle i');
+                        const text = document.querySelector('#themeToggle span');
                         icon.className = 'fas fa-moon text-lg';
                         if (text)
                             text.textContent = 'ليلي';
-                        localStorage.setItem(THEME_KEY, 'false');
+                        localStorage.setItem(THEME_KEY, 'false'); // النهاري
                     }
                 });
 
