@@ -1123,7 +1123,7 @@
             }
         </style>
     </head>
-    <body class="flex flex-col min-h-screen">
+    <body class="flex flex-col min-h-screen dark-mode">
         <!-- الرأس -->
         <header class="relative flex items-center justify-between px-3 py-2 min-h-[60px] border-bottom border-[var(--border-color)]">
             <div class="flex items-center gap-2 z-10">
@@ -1154,8 +1154,8 @@
                     <i class="fas fa-redo-alt text-sm"></i>
                 </button>
                 <button id="themeToggle" class="p-2 hover:bg-[var(--default-color)] rounded-full flex items-center gap-1">
-                    <i class="fas fa-moon text-lg"></i>
-                </button>
+    <i class="fas fa-sun text-lg"></i> <span class="mobile-hidden text-sm">نهاري</span>
+</button>
             </div>
         </header>
         <!-- شبكة اللعبة -->
@@ -1480,16 +1480,25 @@
 
             // تحميل الوضع الليلي
             function loadTheme() {
-                const isDark = localStorage.getItem(THEME_KEY) === 'true';
-                if (isDark) {
-                    document.body.classList.add('dark-mode');
-                    const icon = document.querySelector('#themeToggle i');
-                    const text = document.querySelector('#themeToggle span');
-                    icon.className = 'fas fa-sun text-lg';
-                    if (text)
-                        text.textContent = 'نهاري';
-                }
-            }
+    // التحقق مما إذا كان هناك اختيار سابق مخزن
+    const savedTheme = localStorage.getItem(THEME_KEY);
+    
+    // إذا لم يوجد اختيار سابق (أول مرة يدخل)، اجعل الافتراضي "true" (ليلي)
+    const isDark = savedTheme === null ? true : savedTheme === 'true';
+    
+    const icon = document.querySelector('#themeToggle i');
+    const text = document.querySelector('#themeToggle span');
+
+    if (isDark) {
+        document.body.classList.add('dark-mode');
+        if (icon) icon.className = 'fas fa-sun text-lg';
+        if (text) text.textContent = 'نهاري';
+    } else {
+        document.body.classList.remove('dark-mode');
+        if (icon) icon.className = 'fas fa-moon text-lg';
+        if (text) text.textContent = 'ليلي';
+    }
+}
 
             // عرض التعليمات إذا كانت أول مرة
             function showHelpIfFirstTime() {
