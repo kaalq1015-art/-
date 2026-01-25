@@ -1313,28 +1313,28 @@
 
             
             // حالة اللعبة
-           const gameState = {
-    targetWord: "",
-    currentRow: 0,
-    currentGuess: "",
-    gameOver: false,
-    gameWon: false,
-    startTime: null,
-    gameDuration: 0,
-    attemptResults: [],
-    stats: {
-        played: 0,
-        wins: 0,
-        currentStreak: 0,
-        maxStreak: 0
-    },
-    attemptsHistory: [],
-    attemptMatrices: [],
-    isProcessing: false,
-    inputLock: false,
-    difficulty: 'easy', 
-    maxRows: 8
-};
+            const gameState = {
+                targetWord: "",
+                currentRow: 0,
+                currentGuess: "",
+                gameOver: false,
+                gameWon: false,
+                startTime: null,
+                gameDuration: 0,
+                attemptResults: [],
+                stats: {
+                    played: 0,
+                    wins: 0,
+                    currentStreak: 0,
+                    maxStreak: 0
+                },
+                attemptsHistory: [],
+                attemptMatrices: [],
+                isProcessing: false,
+                inputLock: false,
+                difficulty: 'easy', // 'easy' أو 'hard'
+                maxRows: 6 // القيمة الافتراضية: سهل = 6، صعب = 8
+            };
 
             // التهيئة
             function init() {
@@ -1353,14 +1353,13 @@
 
             // تحميل مستوى الصعوبة
             function loadDifficulty() {
-    const saved = localStorage.getItem(DIFFICULTY_KEY);
-    if (saved && (saved === 'easy' || saved === 'hard')) {
-        gameState.difficulty = saved;
-    } else {
-        gameState.difficulty = 'easy';
-    }
-    gameState.maxRows = gameState.difficulty === 'easy' ? 8 : 6;
-}
+                const saved = localStorage.getItem(DIFFICULTY_KEY);
+                if (saved && (saved === 'easy' || saved === 'hard')) {
+                    gameState.difficulty = saved;
+                } else {
+                    gameState.difficulty = 'easy';
+                }
+                gameState.maxRows = gameState.difficulty === 'easy' ? 6 : 8;
             }
 
             // حفظ مستوى الصعوبة
@@ -1370,34 +1369,35 @@
 
             // تحديث واجهة مستوى الصعوبة
             function updateDifficultyUI() {
-    const easyOption = document.querySelector('[data-difficulty="easy"]');
-    const hardOption = document.querySelector('[data-difficulty="hard"]');
-    const helpText = document.getElementById('helpAttemptsText');
-    
-    if (gameState.difficulty === 'easy') {
-        easyOption.classList.add('active');
-        hardOption.classList.remove('active');
-        if (helpText) helpText.textContent = '8 محاولات';
-    } else {
-        easyOption.classList.remove('active');
-        hardOption.classList.add('active');
-        if (helpText) helpText.textContent = '6 محاولات';
-    }
-}
+                const easyOption = document.querySelector('[data-difficulty="easy"]');
+                const hardOption = document.querySelector('[data-difficulty="hard"]');
+                const helpText = document.getElementById('helpAttemptsText');
+                
+                if (gameState.difficulty === 'easy') {
+                    easyOption.classList.add('active');
+                    hardOption.classList.remove('active');
+                    helpText.textContent = 'خمّن الكلمة في 6 محاولات.';
+                } else {
+                    easyOption.classList.remove('active');
+                    hardOption.classList.add('active');
+                    helpText.textContent = 'خمّن الكلمة في 8 محاولات.';
+                }
+            }
 
             // تغيير مستوى الصعوبة
             function changeDifficulty(newDifficulty) {
-    if (newDifficulty !== 'easy' && newDifficulty !== 'hard') return;
-    if (gameState.difficulty === newDifficulty) return;
-    
-    gameState.difficulty = newDifficulty;
-    gameState.maxRows = newDifficulty === 'easy' ? 8 : 6;
-    saveDifficulty();
-    updateDifficultyUI();
-    
-    createGrid();
-    startNewGame();
-}
+                if (newDifficulty !== 'easy' && newDifficulty !== 'hard') return;
+                if (gameState.difficulty === newDifficulty) return;
+                
+                gameState.difficulty = newDifficulty;
+                gameState.maxRows = newDifficulty === 'easy' ? 6 : 8;
+                saveDifficulty();
+                updateDifficultyUI();
+                
+                // إعادة إنشاء الشبكة بناءً على الصعوبة الجديدة
+                createGrid();
+                startNewGame();
+            }
 
             // تحميل الإحصائيات
             function loadStats() {
